@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Employee">
+
+	<resultMap type='Employee' id='EmployeeData'>
+		<id property='id' column='id' />
+		<result property='employeeId' column='employeeId' />
+		<result property='employeeName' column='employeeName' />
+		<result property='employeeGender' column='employeeGender' />
+		<result property='employeeTitle' column='employeeTitle' />
+		<result property='employeeDepartment' column='employeeDepartment' />
+		<result property='employeeGrade' column='employeeGrade' />
+		<result property='employeeStation' column='employeeStation' />
+		<result property='employeeNumber' column='employeeNumber' />
+		<result property='dateOfJoining' column='dateOfJoining' />
+		<result property='leaveDaysBalance' column='leaveDaysBalance' />
+	</resultMap>
+	<!-- Normal -->
+
+	<select id="getEmployeeData" parameterType="int" resultMap="EmployeeDataResult">
+		select * from
+		Employee where employeeId = #{employeeId};
+	</select>
+	
+	<select id="getByEmployeeId" parameterType="int" resultMap="EmployeeApplicationResult">
+		select * from
+		LeaveApplication where employeeId = #{employeeId};
+	</select>
+
+</mapper>

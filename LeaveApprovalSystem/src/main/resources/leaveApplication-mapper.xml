@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="LeaveApplication">
+
+	<resultMap type='LeaveApplication' id='LeaveApplicationResult'>
+		<id property='applicationId' column='applicationId' />
+		<result property='leaveType' column='leaveType' />
+		<result property='daysRequested' column='daysRequested' />
+		<result property='applicationDate' column='applicationDate' />
+		<result property='startDate' column='startDate' />
+		<result property='endDate' column='endDate' />
+		<result property='remarks' column='remarks' />
+		<result property='applcationStatus' column='applcationStatus' />
+	</resultMap>
+	<!-- Normal -->
+	<insert id="submit" parameterType="LeaveApplication" keyProperty='applicaitionId'>
+		insert into
+		LeaveApplication (leaveType, daysRequested, applicationDate, startDate, endDate, remarks, applicaitonStatus) 
+		values (#{leaveType},#{daysRequested}, #{applicationDate}, #{startDate}, (#{endDate}, (#{remarks}, (#{applicaitonStatus});
+	</insert>
+
+	<select id="getPendingApplications" parameterType="int" resultMap="LeaveApplicationResult">
+		select * from 
+		LeaveApplication where applicationstatus = 'pending';
+	</select>
+
+	<select id="getDeniedAndApprovedApplications" parameterType="int" resultMap="LeaveApplicationResult">
+		select * from 
+		LeaveApplcation where status != 'pending';
+	</select>
+	
+	<update id="amend" parameterType="LeaveApplication">
+		update LeaveApplication 
+		set 
+		applicaitonStatus=#{applicaitonStatus},
+		where applicationId=#{applicationId} ;
+	</update>
+</mapper>
