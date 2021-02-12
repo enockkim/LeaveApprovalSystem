@@ -3,7 +3,7 @@
 
 <mapper namespace="Employee">
 
-	<resultMap type='Employee' id='EmployeeData'>
+	<resultMap type='Employee' id='EmployeeDataResult'>
 		<id property='id' column='id' />
 		<result property='employeeId' column='employeeId' />
 		<result property='employeeName' column='employeeName' />
@@ -23,9 +23,9 @@
 		Employee where employeeId = #{employeeId};
 	</select>
 	
-	<select id="getByEmployeeId" parameterType="int" resultMap="EmployeeApplicationResult">
-		select * from
-		LeaveApplication where employeeId = #{employeeId};
+	<select id="checkEmployeeId" parameterType="int" resultType="int">
+		select exists 
+		(select * from employee where employeeId = #{employeeId})
+		as status;
 	</select>
-
 </mapper>

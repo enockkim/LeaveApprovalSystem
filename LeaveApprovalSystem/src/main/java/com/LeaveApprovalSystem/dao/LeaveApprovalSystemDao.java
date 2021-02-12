@@ -19,6 +19,9 @@ public interface LeaveApprovalSystemDao {
 	//Get leave applications according to Employee ID
 	public List<LeaveApplication> getByEmployeeId(int employeeId);
 	
+	//Check existence of employee
+	public int checkEmployeeId(int employeeId);
+	
 	//Amend leave application
 	public boolean amend(LeaveApplication leaveApplication);
 	
@@ -27,4 +30,7 @@ public interface LeaveApprovalSystemDao {
 	
 	//Get username and password of leave approver
 	public String[] getLoginDetails(String username, String password);
+	
+	//Get application by application ID
+	public List<LeaveApplication> getByApplicationId(int applicationId);
 }

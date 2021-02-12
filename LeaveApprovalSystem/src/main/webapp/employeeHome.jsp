@@ -3,7 +3,7 @@
    pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <html>
    <head>
-      <title>Leave Approver</title>
+      <title>Employee - Home</title>
       <link rel="stylesheet"
          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -11,9 +11,10 @@
    </head>
    <body>
       <div class="container">
-      <h1>Pending Leave Applications</h1>
+      <a href="apply"><button type="button" class="btn btn-info">Apply for Leave</button></a>
+      <h1>Leave Applications</h1>
          <table class="table table-striped table-bordered">
-            <caption>Above are summaries of each leave application. Click view to see more details and perform an action.</caption>
+            <caption>Above are summaries of each leave application. Click download to download the leave application.</caption>
             <thead>
                <tr>
                   <th scope="col">Application ID</th>
@@ -28,7 +29,7 @@
                </tr>
             </thead>
             <tbody>
-               <c:forEach items="${pendingLeaveApplications}" var="LeaveApplication">
+               <c:forEach items="${employeeLeaveApplications}" var="LeaveApplication">
                   <tr>
                      <td>
                         <c:out value="${LeaveApplication.applicationId}" />
@@ -57,8 +58,8 @@
                      <td>
                         <c:out value="${LeaveApplication.applicationStatus}" />
                      </td>
-                     <td><a href="viewApplicationDetails?applicationId=${LeaveApplication.applicationId}"><button
-                        class="btn btn-outline-danger" type="button">View</button></a></td>
+                     <td><a href="downloadLeaveApplication?applicationId=${LeaveApplication.applicationId}"><button
+                        class="btn btn-outline-danger" type="button">Download</button></a></td>
                   </tr>
                </c:forEach>
             </tbody>

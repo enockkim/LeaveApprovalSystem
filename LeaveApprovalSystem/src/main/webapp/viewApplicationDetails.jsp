@@ -11,7 +11,8 @@
    </head>
    <body>
       <div class="container">
-      <h1>Pending Leave Applications</h1>
+      <h1>Leave Application</h1>
+      	<p>Application ID: ${LeaveApplication.applicationId}</p>
          <table class="table table-striped table-bordered">
             <caption>Above are summaries of each leave application. Click view to see more details and perform an action.</caption>
             <thead>
@@ -28,7 +29,7 @@
                </tr>
             </thead>
             <tbody>
-               <c:forEach items="${pendingLeaveApplications}" var="LeaveApplication">
+               <c:forEach items="${leaveApplicationDetails}" var="LeaveApplication">
                   <tr>
                      <td>
                         <c:out value="${LeaveApplication.applicationId}" />

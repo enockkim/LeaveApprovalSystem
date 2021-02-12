@@ -4,7 +4,7 @@
 <html>
    <head>
       <meta charset="ISO-8859-1">
-      <title>Login</title>
+      <title>Leave Application</title>
       <link rel="stylesheet"
          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -16,21 +16,17 @@
       <script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
    </head>
    <body>
-   <h2>Leave Approver Login</h2>
       <div class="container">
-         <a href="login"><button type="button" class="btn btn-info">Home</button></a>
+         <a href="employeeIdCheck"><button type="button" class="btn btn-info">Home</button></a>
          <br> <br>
-         <form action="login" method="post">
+         <h3>Enter your Employee ID</h3>
+         <h3 style="color:red;">${error}</h3>
+         <form action="employeeIdCheck" method="post">
             <div class="form-group">
-               <label for="fname">Username</label>
-               <input type="text" class="form-control" id="username" name="username" >
-            </div>
-            <div class="form-group">
-               <label for="lname">Password</label>
-               <input type="text" class="form-control" id="password" name="password" >
+               <label for="employeeId">Employee ID</label>
+               <input type="text" class="form-control" id="employeeId" name="employeeId" >
             </div>            
-            <button type="submit" class="btn btn-outline-success">Login</button>
-            <h3>${error}</h3>
+            <button type="submit" class="btn btn-outline-success">Log In</button>
          </form>
       </div>
    </body>

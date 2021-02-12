@@ -3,8 +3,9 @@ package com.LeaveApprovalSystem.models;
 public class LeaveApplication {
 	
 	private int applicationId;
+	private int employeeId;
 	private	String leaveType;
-	private String daysRequested;
+	private int daysRequested;
 	private String applicationDate;
 	private String startDate;
 	private String endDate;
@@ -12,10 +13,11 @@ public class LeaveApplication {
 	private String applicationStatus;
 	
 	
-	public LeaveApplication(int applicationId, String leaveType, String daysRequested, String applicationDate,
-			String startDate, String endDate, String remarks, String applicationStatus) {
+	public LeaveApplication(int applicationId, int employeeId, String leaveType, int daysRequested,
+			String applicationDate, String startDate, String endDate, String remarks, String applicationStatus) {
 		super();
 		this.applicationId = applicationId;
+		this.employeeId = employeeId;
 		this.leaveType = leaveType;
 		this.daysRequested = daysRequested;
 		this.applicationDate = applicationDate;
@@ -24,11 +26,29 @@ public class LeaveApplication {
 		this.remarks = remarks;
 		this.applicationStatus = applicationStatus;
 	}
+	
+	public LeaveApplication(int employeeId, String leaveType, int daysRequested, String applicationDate,
+			String startDate, String endDate) {
+		super();
+		this.employeeId = employeeId;
+		this.leaveType = leaveType;
+		this.daysRequested = daysRequested;
+		this.applicationDate = applicationDate;
+		this.startDate = startDate;
+		this.endDate = endDate;
+	}
+	
 	public int getApplicationId() {
 		return applicationId;
 	}
 	public void setApplicationId(int applicationId) {
 		this.applicationId = applicationId;
+	}
+	public int getEmployeeId() {
+		return employeeId;
+	}
+	public void setEmployeeId(int employeeId) {
+		this.employeeId = employeeId;
 	}
 	public String getLeaveType() {
 		return leaveType;
@@ -36,10 +56,10 @@ public class LeaveApplication {
 	public void setLeaveType(String leaveType) {
 		this.leaveType = leaveType;
 	}
-	public String getDaysRequested() {
+	public int getDaysRequested() {
 		return daysRequested;
 	}
-	public void setDaysRequested(String daysRequested) {
+	public void setDaysRequested(int daysRequested) {
 		this.daysRequested = daysRequested;
 	}
 	public String getApplicationDate() {

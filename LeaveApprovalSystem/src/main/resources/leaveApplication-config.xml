@@ -3,6 +3,7 @@
 <configuration>
 	<typeAliases>
 	   <typeAlias alias = "LeaveApplication" type = "com.LeaveApprovalSystem.models.LeaveApplication"/>
+	   <typeAlias alias = "Employee" type = "com.LeaveApprovalSystem.models.Employee"/>
 	</typeAliases>	
    <environments default = "development">
       <environment id = "development">

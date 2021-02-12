@@ -5,6 +5,7 @@
 
 	<resultMap type='LeaveApplication' id='LeaveApplicationResult'>
 		<id property='applicationId' column='applicationId' />
+		<result property= 'employeeId' column='employeeId'/>
 		<result property='leaveType' column='leaveType' />
 		<result property='daysRequested' column='daysRequested' />
 		<result property='applicationDate' column='applicationDate' />
@@ -14,10 +15,10 @@
 		<result property='applcationStatus' column='applcationStatus' />
 	</resultMap>
 	<!-- Normal -->
-	<insert id="submit" parameterType="LeaveApplication" keyProperty='applicaitionId'>
+	<insert id="submit" parameterType="LeaveApplication" keyProperty='applicationId' useGeneratedKeys="true">
 		insert into
-		LeaveApplication (leaveType, daysRequested, applicationDate, startDate, endDate, remarks, applicaitonStatus) 
-		values (#{leaveType},#{daysRequested}, #{applicationDate}, #{startDate}, (#{endDate}, (#{remarks}, (#{applicaitonStatus});
+		LeaveApplication (employeeId, leaveType, daysRequested, applicationDate, startDate, endDate) 
+		values (#{employeeId},#{leaveType},#{daysRequested}, #{applicationDate}, #{startDate}, #{endDate});
 	</insert>
 
 	<select id="getPendingApplications" parameterType="int" resultMap="LeaveApplicationResult">
@@ -36,4 +37,14 @@
 		applicaitonStatus=#{applicaitonStatus},
 		where applicationId=#{applicationId} ;
 	</update>
+	
+	<select id="getByEmployeeId" parameterType="int" resultMap="LeaveApplicationResult">
+		select * from
+		LeaveApplication where employeeId = #{employeeId};
+	</select>
+	
+	<select id="getByApplicationId" parameterType="int" resultMap="LeaveApplicationResult">
+		select * from
+		LeaveApplication where applicationId = #{applicationId};
+	</select>
 </mapper>

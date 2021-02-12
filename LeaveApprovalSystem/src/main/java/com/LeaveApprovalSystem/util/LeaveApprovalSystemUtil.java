@@ -7,11 +7,11 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-public class EmployeeUtil {
+public class LeaveApprovalSystemUtil {
 	
 	private static SqlSessionFactory factory;
 	 
-	private EmployeeUtil() {}
+	private LeaveApprovalSystemUtil() {}
 	 
 	static{
 		Reader reader = null;

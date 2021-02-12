@@ -11,11 +11,12 @@
    </head>
 <body>
 	<h1>Please choose an option below.</h1>
-	<a href="employee">
+	<a href="employeeLogin">
 		<button class="btn btn-outline-danger" type="button">Employee</button>
 	</a>
 	<a href="leaveApproverLogin">
 		<button class="btn btn-outline-danger" type="button">Leave Approver</button>
     </a>
 </body>
+
 </html>
