@@ -13,6 +13,12 @@ public interface LeaveApprovalSystemDao {
 	//Get pending leave applications
 	public List<LeaveApplication> getPendingApplications();
 	
+	//Get approved leave applications
+	public List<LeaveApplication> getApprovedApplications();
+	
+	//Get approved leave applications
+	public List<LeaveApplication> getDeniedApplications();
+	
 	//Get denied and approved leave applications
 	public List<LeaveApplication> getDeniedAndApprovedApplications();
 	
@@ -25,12 +31,15 @@ public interface LeaveApprovalSystemDao {
 	//Amend leave application
 	public boolean amend(LeaveApplication leaveApplication);
 	
+	//Reduce leave balance
+	public boolean updateLeaveBalance(Employee employee);
+	
 	//Get employee details by Employee ID to auto fill leave application form
-	public List<Employee> getEmployeeData(int employeeId);
+	public Employee getEmployeeData(int employeeId);
 	
 	//Get username and password of leave approver
 	public String[] getLoginDetails(String username, String password);
 	
 	//Get application by application ID
-	public List<LeaveApplication> getByApplicationId(int applicationId);
+	public LeaveApplication getByApplicationId(int applicationId);
 }

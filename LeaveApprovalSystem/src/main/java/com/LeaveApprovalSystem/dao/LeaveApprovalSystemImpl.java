@@ -2,12 +2,16 @@ package com.LeaveApprovalSystem.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.LeaveApprovalSystem.models.Employee;
 import com.LeaveApprovalSystem.models.LeaveApplication;
 import com.LeaveApprovalSystem.util.LeaveApprovalSystemUtil;
 import com.LeaveApprovalSystem.util.LeaveApproverUtil;
+import com.mysql.cj.Session;
 
 public class LeaveApprovalSystemImpl implements LeaveApprovalSystemDao {
 
@@ -39,6 +43,35 @@ public class LeaveApprovalSystemImpl implements LeaveApprovalSystemDao {
 		    }
 		return pendingLeaveApplications;
 	}
+	
+	public List<LeaveApplication> getApprovedApplications() {
+	    List <LeaveApplication> approvedLeaveApplications = null;
+	    SqlSession session = LeaveApprovalSystemUtil.getSqlSessionFactory().openSession();
+	    try {
+	    	approvedLeaveApplications = session.selectList("LeaveApplication.getApprovedApplications");
+	        session.commit();
+	        session.close();
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+		return approvedLeaveApplications;
+	}
+	
+	public List<LeaveApplication> getDeniedApplications() {
+	    List <LeaveApplication> deniedLeaveApplications = null;
+	    SqlSession session = LeaveApprovalSystemUtil.getSqlSessionFactory().openSession();
+	    try {
+	    	deniedLeaveApplications = session.selectList("LeaveApplication.getDeniedApplications");
+	        session.commit();
+	        session.close();
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+		return deniedLeaveApplications;
+	}
+
 
 	public List<LeaveApplication> getDeniedAndApprovedApplications() {
 		// TODO Auto-generated method stub
@@ -60,13 +93,18 @@ public class LeaveApprovalSystemImpl implements LeaveApprovalSystemDao {
 	}
 
 	public boolean amend(LeaveApplication leaveApplication) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public List<Employee> getEmployeeData(int employeeId) {
-		// TODO Auto-generated method stub
-		return null;
+        boolean status = false;
+        SqlSession session = LeaveApprovalSystemUtil.getSqlSessionFactory().openSession();
+        try {
+			session.update("LeaveApplication.amend", leaveApplication);
+			session.commit();
+			status = true;
+			session.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return status;
 	}
 
 	public String[] getLoginDetails(String username, String password) {
@@ -89,12 +127,26 @@ public class LeaveApprovalSystemImpl implements LeaveApprovalSystemDao {
 	    }
 	    return status;
 	}
-
-	public List<LeaveApplication> getByApplicationId(int applicationId) {
-	    List <LeaveApplication> employeeLeaveApplication = null;
+	
+	public Employee getEmployeeData(int employeeId) {
+		Employee employeeData = null;
 	    SqlSession session = LeaveApprovalSystemUtil.getSqlSessionFactory().openSession();
 	    try {
-	    	employeeLeaveApplication = session.selectList("LeaveApplication.getByApplicationId", applicationId);
+	    	employeeData = session.selectOne("Employee.getEmployeeData", employeeId);
+	        session.commit();
+	        session.close();
+	
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return employeeData;
+	}
+
+	public LeaveApplication getByApplicationId(int applicationId) {
+		LeaveApplication employeeLeaveApplication = null;
+	    SqlSession session = LeaveApprovalSystemUtil.getSqlSessionFactory().openSession();
+	    try {
+	    	employeeLeaveApplication = session.selectOne("LeaveApplication.getByApplicationId", applicationId);
 	        session.commit();
 	        session.close();
 	
@@ -102,6 +154,21 @@ public class LeaveApprovalSystemImpl implements LeaveApprovalSystemDao {
 	        e.printStackTrace();
 	    }
 	    return employeeLeaveApplication;
+	}
+
+	public boolean updateLeaveBalance(Employee employee) {
+        boolean status = false;
+        SqlSession session = LeaveApprovalSystemUtil.getSqlSessionFactory().openSession();
+        try {
+			session.update("Employee.updateLeaveBalance", employee);
+			session.commit();
+			status = true;
+			session.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return status;
 	}
 
 }

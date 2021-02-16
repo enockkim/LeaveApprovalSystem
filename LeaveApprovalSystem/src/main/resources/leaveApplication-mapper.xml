@@ -26,16 +26,22 @@
 		LeaveApplication where applicationstatus = 'pending';
 	</select>
 
-	<select id="getDeniedAndApprovedApplications" parameterType="int" resultMap="LeaveApplicationResult">
+	<select id="getApprovedApplications" parameterType="int" resultMap="LeaveApplicationResult">
 		select * from 
-		LeaveApplcation where status != 'pending';
+		LeaveApplication where applicationstatus = 'approved';
+	</select>
+	
+	<select id="getDeniedApplications" parameterType="int" resultMap="LeaveApplicationResult">
+		select * from 
+		LeaveApplication where applicationstatus = 'denied';
 	</select>
 	
 	<update id="amend" parameterType="LeaveApplication">
-		update LeaveApplication 
-		set 
-		applicaitonStatus=#{applicaitonStatus},
-		where applicationId=#{applicationId} ;
+		UPDATE LeaveApplication 
+		SET 
+		remarks = #{remarks}, applicationStatus = #{applicationStatus} 
+		WHERE 
+		applicationId = #{applicationId};
 	</update>
 	
 	<select id="getByEmployeeId" parameterType="int" resultMap="LeaveApplicationResult">

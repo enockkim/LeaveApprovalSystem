@@ -3,8 +3,10 @@ package com.LeaveApprovalSystem.controllers;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,34 +19,14 @@ import com.LeaveApprovalSystem.models.Employee;
 import com.LeaveApprovalSystem.models.LeaveApplication;
 
 @Controller
-public class LeaveApplicationController {
+public class EmployeeController {
 	
 	@Autowired
 	LeaveApprovalSystemDao leaveApproverDao;
 	
     private ModelAndView mv = new ModelAndView();
 
-    //Maps "/leaveApprover" url and gets applications that are pending displaying them on a table in the view
-    @RequestMapping("/leaveApprover")
-    public ModelAndView getAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        List <LeaveApplication> pendingLeaveApplications = leaveApproverDao.getPendingApplications();
-        mv.setViewName("leaveApprover.jsp");
-        mv.addObject("pendingLeaveApplications", pendingLeaveApplications);
-
-        return mv;
-    }
-    
-    //Get leave application details for approver to view and deny/approve
-    @RequestMapping("/viewApplicationDetails")
-    public ModelAndView getByApplicationId(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	int applicationId = Integer.parseInt(request.getParameter("applicationId"));
-        List <LeaveApplication> leaveApplicationDetails = leaveApproverDao.getByApplicationId(applicationId);
-        mv.setViewName("viewApplicationDetails.jsp");
-        mv.addObject("leaveApplicationDetails", leaveApplicationDetails);
-
-        return mv;
-    }
-    
+    //Open employee home page and show table containing previously applied leaves
     @RequestMapping("/employeeHome")
     public ModelAndView getByEmployeeId(HttpServletRequest request, HttpServletResponse response) throws IOException {
     	int employeeId = Integer.parseInt(request.getParameter("employeeId"));
@@ -52,41 +34,18 @@ public class LeaveApplicationController {
         List <LeaveApplication> employeeLeaveApplications = leaveApproverDao.getByEmployeeId(employeeId);
         mv.setViewName("employeeHome.jsp");
         mv.addObject("employeeLeaveApplications", employeeLeaveApplications);
+        mv.addObject("employeeId", employeeId);
 
         return mv;
     }
     
-    @RequestMapping("/leaveApproverLogin")
-    public String leaveApproverLogin() {
-    	return "redirect:leaveApproverLogin.jsp";
-    }
-
+    //Employee login
     @RequestMapping("/employeeLogin")
     public String employeeLogin() {
     	return "redirect:employeeIdCheck.jsp";
     }
     
-	@RequestMapping("/login")
-	public ModelAndView createEmployee(HttpServletRequest request, HttpServletResponse response) {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		
-		String[] logInDetails = leaveApproverDao.getLoginDetails(username, password);
-		
-//		return mv;
-		//Username and password validation
-		if (username.equals(logInDetails[0]) && password.equals(logInDetails[1])) {			
-	        mv.setViewName("/leaveApprover");
-//			return "redirect:/leaveApprover";
-		}else {
-			String error = "Incorrect username or password.";
-	        mv.setViewName("leaveApproverLogin.jsp");
-	        mv.addObject("error", error);
-//			return "redirect:/leaveApproverLogin";			
-		}
-		return mv;
-	}
-	
+    //Opens form for new leave application
 	@RequestMapping("/apply")
 	public ModelAndView openLeaveApplication(HttpServletRequest request, HttpServletResponse response) {
 		int employeeId = Integer.parseInt(request.getParameter("employeeId"));
@@ -96,6 +55,7 @@ public class LeaveApplicationController {
 		return mv;
 	}
 	
+	//Submits leave applications and saves to database
 	@RequestMapping("/submit")
 	public ModelAndView submitLeaveApplication(HttpServletRequest request, HttpServletResponse response) {
 //	    int applicationId;
@@ -110,7 +70,7 @@ public class LeaveApplicationController {
 	    
 	    boolean status = false;
 	    List <LeaveApplication> leaveApplication = null;
-	
+	    
 	    status = leaveApproverDao.submit(new LeaveApplication(employeeId, leaveType, daysRequested, applicationDate, startDate, endDate));
 	    if (status == true) {
 //	    	leaveApplication = leaveApproverDao.getAll();
@@ -126,6 +86,7 @@ public class LeaveApplicationController {
 	    return mv;
 	}
 	
+	//Checks if employee id exists in database
 	@RequestMapping("/employeeIdCheck")
 	public ModelAndView employeeIdCheck(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int employeeId = Integer.parseInt(request.getParameter("employeeId"));
@@ -147,4 +108,6 @@ public class LeaveApplicationController {
 
         return mv;
 	}
+    
+
 }

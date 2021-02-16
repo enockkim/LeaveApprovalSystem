@@ -28,4 +28,8 @@
 		(select * from employee where employeeId = #{employeeId})
 		as status;
 	</select>
+	
+	<update id="updateLeaveBalance" parameterType="Employee">
+		update employee set leaveDaysBalance = #{leaveDaysBalance} where employeeId = #{employeeId};
+	</update>
 </mapper>

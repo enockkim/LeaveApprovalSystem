@@ -11,59 +11,86 @@
    </head>
    <body>
       <div class="container">
-      <h1>Leave Application</h1>
-      	<p>Application ID: ${LeaveApplication.applicationId}</p>
-         <table class="table table-striped table-bordered">
-            <caption>Above are summaries of each leave application. Click view to see more details and perform an action.</caption>
-            <thead>
-               <tr>
-                  <th scope="col">Application ID</th>
-                  <th scope="col">Employee ID</th>
-                  <th scope="col">Leave Type</th>
-                  <th scope="col">Days Requested</th>
-                  <th scope="col">Application</th>
-                  <th scope="col">Start Date</th>
-                  <th scope="col">End Date</th>
-                  <th scope="col">Remarks</th>
-                  <th scope="col">Status</th>
-               </tr>
-            </thead>
-            <tbody>
-               <c:forEach items="${leaveApplicationDetails}" var="LeaveApplication">
-                  <tr>
-                     <td>
-                        <c:out value="${LeaveApplication.applicationId}" />
-                     </td>
-                     <td>
-                        <c:out value="${LeaveApplication.employeeId}" />
-                     </td>
-                     <td>
-                        <c:out value="${LeaveApplication.leaveType}" />
-                     </td>
-                     <td>
-                        <c:out value="${LeaveApplication.daysRequested}" />
-                     </td>
-                     <td>
-                        <c:out value="${LeaveApplication.applicationDate}" />
-                     </td>
-                     <td>
-                        <c:out value="${LeaveApplication.startDate}" />
-                     </td>
-                     <td>
-                        <c:out value="${LeaveApplication.endDate}" />
-                     </td>
-                     <td>
-                        <c:out value="${LeaveApplication.remarks}" />
-                     </td>
-                     <td>
-                        <c:out value="${LeaveApplication.applicationStatus}" />
-                     </td>
-                     <td><a href="viewApplicationDetails?applicationId=${LeaveApplication.applicationId}"><button
-                        class="btn btn-outline-danger" type="button">View</button></a></td>
-                  </tr>
-               </c:forEach>
-            </tbody>
-         </table>
+	      <h1>Leave Application</h1>
+	      <form method="post" action="amend">
+	            <div class="form-group">
+	               <label for="applicationId">Application ID</label>
+	               <input type="text" class="form-control" id="applicationId" name="applicationId" value="${leaveApplicationDetails.applicationId}" readonly>
+	            </div>
+	             <div class="form-group">
+	               <label for="applicationId">Employee ID</label>
+	               <input type="text" class="form-control" id="employeeId" name="employeeId" value="${leaveApplicationDetails.employeeId}" readonly>
+	            </div>
+	           	<div class="form-group">
+	           		<label for="applicationId">Leave Days Balance</label>
+	               <input type="text" class="form-control" id="leaveDaysBalance" name="leaveDaysBalance" value="${employeeData.leaveDaysBalance}" readonly>
+	            </div>
+	             <div class="form-group">
+	               <label for="applicationId">Name</label>
+	               <input type="text" class="form-control" value="${employeeData.employeeName}" readonly>
+	            </div>
+	             <div class="form-group">
+	               <label for="applicationId">Title</label>
+	               <input type="text" class="form-control" value="${employeeData.employeeTitle}" readonly>
+	            </div>
+	             <div class="form-group">
+	               <label for="applicationId">Department</label>
+	               <input type="text" class="form-control" value="${employeeData.employeeDepartment}" readonly>
+	            </div>
+	             <div class="form-group">
+	               <label for="applicationId">Station</label>
+	               <input type="text" class="form-control" value="${employeeData.employeeStation}" readonly>
+	            </div>
+	             <div class="form-group">
+	               <label for="applicationId">Gender</label>
+	               <input type="text" class="form-control" value="${employeeData.employeeGender}" readonly>
+	            </div>
+	             <div class="form-group">
+	               <label for="applicationId">Employee Date of Joining</label>
+	               <input type="text" class="form-control" value="${employeeData.dateOfJoining}" readonly>
+	            </div>
+	            <div class="form-group">
+	               <label for="applicationId">Leave Type</label>
+	               <input type="text" class="form-control" name="leaveType" value="${leaveApplicationDetails.leaveType}" readonly>
+	            </div>
+	           	<div class="form-group">
+	               <label for="applicationId">Days Requested</label>
+	               <input type="text" class="form-control" name="daysRequested" value="${leaveApplicationDetails.daysRequested}" readonly>
+	            </div>
+	            <div class="form-group">
+	               <label for="applicationId">Date of Application</label>
+	               <input type="text" class="form-control" value="${leaveApplicationDetails.applicationDate}" readonly>
+	            </div>
+	            <div class="form-group">
+	               <label for="applicationId">Start Date</label>
+	               <input type="text" class="form-control" value="${leaveApplicationDetails.startDate}" readonly>
+	            </div>
+	            <div class="form-group">
+	               <label for="applicationId">End Date</label>
+	               <input type="text" class="form-control" value="${leaveApplicationDetails.endDate}" readonly>
+	            </div>
+	            <div class="form-group">
+	               <label for="applicationId">Application Status</label>
+	               <input type="text" class="form-control" value="${leaveApplicationDetails.applicationStatus}" readonly>
+	            </div>
+	            <div class="form-group">
+	               <label for="applicationId">Remarks</label>
+	               <input type="text" class="form-control" id="remarks" name="remarks" value="${leaveApplicationDetails.remarks}">
+	            </div>
+	            <div class="form-check">
+				  <input class="form-check-input" type="radio" name="action" value="1" checked>
+				  <label class="form-check-label" for="1">
+				    Approve
+				  </label>
+				</div>
+				<div class="form-check">
+				  <input class="form-check-input" type="radio" name="action" value="0">
+				  <label class="form-check-label" for="0">
+				    Deny
+				  </label>
+				</div>
+	            <input type="submit" class="btn btn-outline-success" value="Sumbit"/>
+	         </form>
       </div>
    </body>
 </html>

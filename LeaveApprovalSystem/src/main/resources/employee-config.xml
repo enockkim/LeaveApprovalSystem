@@ -11,9 +11,9 @@
 			
          <dataSource type = "POOLED">
             <property name = "driver" value = "com.mysql.cj.jdbc.Driver"/>
-            <property name = "url" value = "jdbc:mysql://localhost:3306/leave_approval_db"/>
+            <property name = "url" value = "jdbc:mysql://localhost:3307/leave"/>
             <property name = "username" value = "root"/>
-            <property name = "password" value = "#Enock3307"/>
+            <property name = "password" value = ""/>
          </dataSource>   
          
       </environment>

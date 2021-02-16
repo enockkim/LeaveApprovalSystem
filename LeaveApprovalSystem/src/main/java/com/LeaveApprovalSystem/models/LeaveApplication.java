@@ -27,6 +27,13 @@ public class LeaveApplication {
 		this.applicationStatus = applicationStatus;
 	}
 	
+	public LeaveApplication(String remarks, String applicationStatus, int applicationId) {
+		super();
+		this.remarks = remarks;
+		this.applicationStatus = applicationStatus;
+		this.applicationId = applicationId;
+	}
+
 	public LeaveApplication(int employeeId, String leaveType, int daysRequested, String applicationDate,
 			String startDate, String endDate) {
 		super();

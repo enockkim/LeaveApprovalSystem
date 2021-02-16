@@ -21,8 +21,9 @@
          <br> <br>
          <form action="submit" method="post">
             <div class="form-group">
-               <label for="employeeId">Employee ID: ${employeeId}</label>
-            </div>
+       	      <label for="applicationId">Employee ID</label>
+	          <input type="text" class="form-control" id="employeeId" name="employeeId" value="${employeeId}" readonly>
+	        </div>
             <div class="form-group">
                <label for="leaveType">Leave Type</label>
                <input type="text" class="form-control" id="leaveType" name="leaveType" >

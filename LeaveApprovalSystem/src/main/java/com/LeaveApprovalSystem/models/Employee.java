@@ -30,6 +30,12 @@ public class Employee {
 		this.leaveDaysBalance = leaveDaysBalance;
 	}
 	
+	public Employee(int leaveDaysBalance, int employeeId) {
+		super();
+		this.leaveDaysBalance = leaveDaysBalance;
+		this.employeeId = employeeId; 
+	}
+
 	public int getEmployeeId() {
 		return employeeId;
 	}

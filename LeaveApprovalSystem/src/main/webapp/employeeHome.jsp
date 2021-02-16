@@ -11,7 +11,7 @@
    </head>
    <body>
       <div class="container">
-      <a href="apply"><button type="button" class="btn btn-info">Apply for Leave</button></a>
+      	<a href="apply?employeeId=${employeeId}"><button type="button" class="btn btn-info">Apply for Leave</button></a>
       <h1>Leave Applications</h1>
          <table class="table table-striped table-bordered">
             <caption>Above are summaries of each leave application. Click download to download the leave application.</caption>
