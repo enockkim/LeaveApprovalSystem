@@ -18,7 +18,6 @@
             <thead>
                <tr>
                   <th scope="col">Application ID</th>
-                  <th scope="col">Employee ID</th>
                   <th scope="col">Leave Type</th>
                   <th scope="col">Days Requested</th>
                   <th scope="col">Application</th>
@@ -33,9 +32,6 @@
                   <tr>
                      <td>
                         <c:out value="${LeaveApplication.applicationId}" />
-                     </td>
-                     <td>
-                        <c:out value="${LeaveApplication.employeeId}" />
                      </td>
                      <td>
                         <c:out value="${LeaveApplication.leaveType}" />

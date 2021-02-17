@@ -19,6 +19,9 @@ public interface LeaveApprovalSystemDao {
 	//Get approved leave applications
 	public List<LeaveApplication> getDeniedApplications();
 	
+	//Get leave application report data
+	public List<LeaveApplication> getLeaveApplicationReport(int applicationId);
+	
 	//Get denied and approved leave applications
 	public List<LeaveApplication> getDeniedAndApprovedApplications();
 	
@@ -40,6 +43,9 @@ public interface LeaveApprovalSystemDao {
 	//Get username and password of leave approver
 	public String[] getLoginDetails(String username, String password);
 	
-	//Get application by application ID
+	//Get application by application ID to object
 	public LeaveApplication getByApplicationId(int applicationId);
+	
+	//Get application by application ID to list
+	public List<LeaveApplication> getByApplicationIdList(int applicationId);
 }

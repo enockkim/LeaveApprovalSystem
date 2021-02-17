@@ -14,6 +14,24 @@
 		<result property='remarks' column='remarks' />
 		<result property='applcationStatus' column='applcationStatus' />
 	</resultMap>
+	
+	<resultMap type='LeaveApplication' id='LeaveApplicationReportResult'>
+		<id property='applicationId' column='applicationId' />
+		<result property='leaveType' column='leaveType' />
+		<result property='daysRequested' column='daysRequested' />
+		<result property='applicationDate' column='applicationDate' />
+		<result property='startDate' column='startDate' />
+		<result property='endDate' column='endDate' />
+		<result property='remarks' column='remarks' />
+		<result property='applicationStatus' column='applicationStatus' />
+		<association property="employee" javaType="Employee">
+			<result property='employeeId' column='employeeId' />
+			<result property='employeeName' column='employeeName' />
+			<result property='employeeGender' column='employeeGender' />
+			<result property='employeeTitle' column='employeeTitle' />
+			<result property='employeeDepartment' column='employeeDepartment' />
+		</association>
+	</resultMap>
 	<!-- Normal -->
 	<insert id="submit" parameterType="LeaveApplication" keyProperty='applicationId' useGeneratedKeys="true">
 		insert into
@@ -52,5 +70,25 @@
 	<select id="getByApplicationId" parameterType="int" resultMap="LeaveApplicationResult">
 		select * from
 		LeaveApplication where applicationId = #{applicationId};
+	</select>
+	
+	<select id="getLeaveApplicationReport" parameterType="int" resultMap="LeaveApplicationReportResult">
+		SELECT 	leaveapplication.applicationId, 
+				leaveapplication.leaveType, 
+				leaveapplication.daysRequested, 
+				leaveapplication.applicationDate, 
+				leaveapplication.startDate,
+				leaveapplication.endDate, 
+				leaveapplication.remarks, 
+				leaveapplication.applicationStatus, 
+				leaveapplication.employeeId, 
+				employee.employeeName, 
+				employee.employeeGender, 
+				employee.employeeTitle, 
+				employee.employeeDepartment
+		FROM leaveapplication
+		INNER JOIN employee 
+		ON leaveapplication.employeeId=employee.employeeId
+		WHERE leaveapplication.applicationId = #{applicationId};
 	</select>
 </mapper>

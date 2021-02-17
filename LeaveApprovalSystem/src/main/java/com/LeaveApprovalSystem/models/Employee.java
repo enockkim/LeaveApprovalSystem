@@ -2,6 +2,7 @@ package com.LeaveApprovalSystem.models;
 
 public class Employee {
 	
+
 	private int employeeId;
 	private String employeeName;
 	private String employeeGender;
@@ -13,6 +14,8 @@ public class Employee {
 	private String dateOfJoining;
 	private int leaveDaysBalance;
 	
+	public Employee() {
+	}
 	
 	public Employee(int employeeId, String employeeName, String employeeGender, String employeeTitle,
 			String employeeDepartment, String employeeGrade, String employeeStation, String employeeNumber,

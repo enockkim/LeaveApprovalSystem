@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a9615c77-3c7d-4fb5-8647-e178ac26fc71">
+	<field name="applicationId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[applicationId]]></fieldDescription>
+	</field>
+	<field name="employeeId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[employeeId]]></fieldDescription>
+	</field>
+	<field name="employeeName" class="java.lang.String">
+		<fieldDescription><![CDATA[employee.employeeName]]></fieldDescription>
+	</field>
+	<field name="leaveType" class="java.lang.String">
+		<fieldDescription><![CDATA[leaveType]]></fieldDescription>
+	</field>
+	<field name="daysRequested" class="java.lang.Integer">
+		<fieldDescription><![CDATA[daysRequested]]></fieldDescription>
+	</field>
+	<field name="applicationDate" class="java.lang.String">
+		<fieldDescription><![CDATA[applicationDate]]></fieldDescription>
+	</field>
+	<field name="startDate" class="java.lang.String">
+		<fieldDescription><![CDATA[startDate]]></fieldDescription>
+	</field>
+	<field name="endDate" class="java.lang.String">
+		<fieldDescription><![CDATA[endDate]]></fieldDescription>
+	</field>
+	<field name="remarks" class="java.lang.String">
+		<fieldDescription><![CDATA[remarks]]></fieldDescription>
+	</field>
+	<field name="applicationStatus" class="java.lang.String">
+		<fieldDescription><![CDATA[applicationStatus]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="95" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="120" splitType="Stretch">
+			<textField>
+				<reportElement x="300" y="10" width="100" height="30" uuid="1cde2b2c-eb18-4986-8871-a6edc967262d"/>
+				<textFieldExpression><![CDATA[$F{employeeId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="10" width="100" height="30" uuid="86c01100-2c87-4d97-b75a-7c0a9c743b78"/>
+				<textFieldExpression><![CDATA[$F{applicationId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="90" width="100" height="30" uuid="b4d4a212-9f5e-402c-9c08-1e51e76a280d"/>
+				<textFieldExpression><![CDATA[$F{remarks}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="90" width="100" height="30" uuid="848276b6-3bcf-48af-800a-67ead7340f8b"/>
+				<textFieldExpression><![CDATA[$F{applicationStatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="40" width="100" height="30" uuid="8e6a7ccb-9984-4f3c-8e27-dbe929bd6602"/>
+				<textFieldExpression><![CDATA[$F{employeeName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="10" width="100" height="30" uuid="58992922-4aba-4add-8095-61cbd7432bc1"/>
+				<text><![CDATA[Application ID:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="10" width="100" height="30" uuid="428b912e-8fc0-44f5-a1ee-2eb98f94a626"/>
+				<text><![CDATA[Employee ID:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="40" width="100" height="30" uuid="bef22e01-43b8-42ec-a121-5242dae67110"/>
+				<text><![CDATA[Employee Name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="90" width="100" height="30" uuid="a5504f88-7b22-4e9a-903a-7aa9b18c9e17"/>
+				<text><![CDATA[Application Status:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="90" width="100" height="30" uuid="95f00b8f-8db5-4745-bcf8-a40ec061f01a"/>
+				<text><![CDATA[Remarks:]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -155,6 +155,20 @@ public class LeaveApprovalSystemImpl implements LeaveApprovalSystemDao {
 	    }
 	    return employeeLeaveApplication;
 	}
+	
+	public List<LeaveApplication> getByApplicationIdList(int applicationId) {
+		List<LeaveApplication> employeeLeaveApplication = null;
+	    SqlSession session = LeaveApprovalSystemUtil.getSqlSessionFactory().openSession();
+	    try {
+	    	employeeLeaveApplication = session.selectList("LeaveApplication.getByApplicationId", applicationId);
+	        session.commit();
+	        session.close();
+	
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return employeeLeaveApplication;
+	}
 
 	public boolean updateLeaveBalance(Employee employee) {
         boolean status = false;
@@ -169,6 +183,21 @@ public class LeaveApprovalSystemImpl implements LeaveApprovalSystemDao {
 			e.printStackTrace();
 		}
 		return status;
+	}
+
+	public List<LeaveApplication> getLeaveApplicationReport(int applicationId) {
+		System.out.println("getLeaveApplicationReport running");
+		List<LeaveApplication> leaveApplicationReport = null;
+	    SqlSession session = LeaveApprovalSystemUtil.getSqlSessionFactory().openSession();
+	    try {
+	    	leaveApplicationReport = session.selectList("LeaveApplication.getLeaveApplicationReport", applicationId);
+	        session.commit();
+	        session.close();
+	
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return leaveApplicationReport;
 	}
 
 }

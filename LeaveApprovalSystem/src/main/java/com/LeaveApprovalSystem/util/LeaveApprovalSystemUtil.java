@@ -16,7 +16,7 @@ public class LeaveApprovalSystemUtil {
 	static{
 		Reader reader = null;
 		try {
-			reader = Resources.getResourceAsReader("employee-config.xml");
+			reader = Resources.getResourceAsReader("leaveApproverSystem-config.xml");
 		} catch (IOException e) {
 			throw new RuntimeException(e.getMessage());
 		}

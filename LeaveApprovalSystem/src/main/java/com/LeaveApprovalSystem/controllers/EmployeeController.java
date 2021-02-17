@@ -1,7 +1,12 @@
 package com.LeaveApprovalSystem.controllers;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,13 +23,24 @@ import com.LeaveApprovalSystem.models.Employee;
 //import com.LeaveApprovalSystem.models.Employee;
 import com.LeaveApprovalSystem.models.LeaveApplication;
 
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+
 @Controller
 public class EmployeeController {
 	
+
 	@Autowired
 	LeaveApprovalSystemDao leaveApproverDao;
 	
     private ModelAndView mv = new ModelAndView();
+    
+    private Calendar calender = Calendar.getInstance();
 
     //Open employee home page and show table containing previously applied leaves
     @RequestMapping("/employeeHome")
@@ -109,5 +125,45 @@ public class EmployeeController {
         return mv;
 	}
     
+	@RequestMapping("/downloadLeaveApplication")
+    public void downloadLeaveApplication(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int applicationId = Integer.parseInt(request.getParameter("applicationId"));
+        List<LeaveApplication> leaveApplicationReport = leaveApproverDao.getLeaveApplicationReport(applicationId);
+       System.out.println(leaveApplicationReport);
+        try {
+            final InputStream stream = this.getClass().getResourceAsStream("/application-report.jrxml");
+
+            // Compile the Jasper report from .jrxml to .japser
+            final JasperReport report = JasperCompileManager.compileReport(stream);
+
+            // Fetching the employees from the data source.
+            final JRBeanCollectionDataSource source = new JRBeanCollectionDataSource(leaveApplicationReport);
+
+            // Adding the additional parameters to the pdf.
+            final Map < String, Object > parameters = null;
+
+
+            // Filling the report with the employee data and additional parameters information.
+            final JasperPrint print = JasperFillManager.fillReport(report, parameters, source);
+
+            //final String filePath = "C://Users//user//Documents//" + "Employee_report"+date.getDate()+date.getMonth()+date.getYear()+"_"+date.getHours()+"_"+date.getMinutes()+"_"+date.getSeconds()+".pdf";
+            // Export the report to a PDF file.
+            Integer month = calender.get(Calendar.MONTH);
+            response.setContentType("application/x-download");
+            response.addHeader("Content-disposition", "attachment; filename=" + "Employee_report" + calender.get(Calendar.DATE) + "-" + String.valueOf(month + 1) + "-" + calender.get(Calendar.YEAR) + ".pdf");
+            OutputStream out = response.getOutputStream();
+            JasperExportManager.exportReportToPdfStream(print, out);
+            out.flush();
+            out.close();
+
+
+
+        } catch (JRException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+
+    }
 
 }

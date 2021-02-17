@@ -11,8 +11,10 @@ public class LeaveApplication {
 	private String endDate;
 	private String remarks;
 	private String applicationStatus;
+	private Employee employee;
 	
 	
+
 	public LeaveApplication(int applicationId, int employeeId, String leaveType, int daysRequested,
 			String applicationDate, String startDate, String endDate, String remarks, String applicationStatus) {
 		super();
@@ -44,6 +46,18 @@ public class LeaveApplication {
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
+	
+	public LeaveApplication() {
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 	
 	public int getApplicationId() {
 		return applicationId;
@@ -98,6 +112,14 @@ public class LeaveApplication {
 	}
 	public void setApplicationStatus(String applicationStatus) {
 		this.applicationStatus = applicationStatus;
+	}
+
+	@Override
+	public String toString() {
+		return "LeaveApplication [applicationId=" + applicationId + ", employeeId=" + employeeId + ", leaveType="
+				+ leaveType + ", daysRequested=" + daysRequested + ", applicationDate=" + applicationDate
+				+ ", startDate=" + startDate + ", endDate=" + endDate + ", remarks=" + remarks + ", applicationStatus="
+				+ applicationStatus + ", employee=" +getEmployee() + "]";
 	}
 	
 	
